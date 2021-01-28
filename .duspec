@@ -1,0 +1,46 @@
+{
+  "id":"deltics.io.streams",
+  "version":"",
+  "summary":"Provides various stream classes, helpers and utilities.",
+  "tags":[
+    "deltics",
+    "delphi",
+    "unicode",
+    "streams",
+    "readers",
+    "writers",
+    "io"
+  ],
+  "compiler":{
+      "language":"pascal",
+      "product":"delphi",
+      "versions":"[7 .. 10.4], !8"
+    },
+  "copyright":"\u00A92020 Jolyon Direnko-Smith",
+  "language":"en",
+  "content":"source",
+  "dependencies":[
+    "deltics.inc:1.2.0",
+    "deltics.exceptions:1.1.0",
+    "deltics.memento:1.0.0",
+    "deltics.pointers:1.1.1",
+    "deltics.strings:1.2.1-beta.15"
+  ],
+  "source":{
+      "files":[
+        "src\\deltics.io.streams.inc",
+        "src\\Deltics.IO.Streams.pas",
+        "src\\Deltics.IO.Streams.Buffered.pas",
+        "src\\Deltics.IO.Streams.Buffered.Reader.pas",
+        "src\\Deltics.IO.Streams.Buffered.Writer.pas",
+        "src\\Deltics.IO.Streams.Decorator.pas",
+        "src\\Deltics.IO.Streams.InterfacedStream.pas",
+        "src\\Deltics.IO.Streams.Interfaces.pas",
+        "src\\Deltics.IO.Streams.MemoryStream.pas",
+        "src\\Deltics.IO.Streams.MemoryStream.Dynamic.pas",
+        "src\\Deltics.IO.Streams.MemoryStream.Fixed.pas",
+        "src\\Deltics.IO.Streams.PositionMemento.pas",
+        "src\\Deltics.IO.Streams.StringStream.pas"
+      ]
+    }
+}
