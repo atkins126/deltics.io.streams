@@ -50,7 +50,7 @@ interface
     SysUtils,
   { deltics: }
     Deltics.Memento,
-    Deltics.Strings,
+    Deltics.StringTypes,
     Deltics.IO.Streams.Buffered,
     Deltics.IO.Streams.Buffered.Reader,
     Deltics.IO.Streams.Buffered.Writer,

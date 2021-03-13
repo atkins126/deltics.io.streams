@@ -27,6 +27,7 @@ implementation
 
 
   uses
+    Deltics.Memory,
     Deltics.Multicast,
     Deltics.IO.Streams;
 
@@ -42,21 +43,23 @@ implementation
 
 
   procedure FixedMemoryStream.AllowsWritingToAllocatedMemory;
+  const
+    SENTINEL = $7fff8042;
   var
     ptr: Pointer;
     sut: IStream;
     value: Integer;
   begin
-    Getmem(ptr, 4);
-    try
-      sut := MemoryStream.Create(ptr, 4);
-      sut.Write(value, 4);
+    Memory.Alloc(ptr, 4).Managed.Zeroize;
 
-      Test('Value written').Assert(Integer(ptr^)).Equals(value);
+    Test('Memory is initialised').Assert(Integer(ptr^)).Equals(0);
 
-    finally
-      FreeMem(ptr);
-    end;
+    value := SENTINEL;
+
+    sut := MemoryStream.Create(ptr, 4);
+    sut.Write(value, 4);
+
+    Test('Value correctly written').Assert(Integer(ptr^)).Equals(SENTINEL);
   end;
 
 

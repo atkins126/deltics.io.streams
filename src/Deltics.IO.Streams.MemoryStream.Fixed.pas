@@ -7,7 +7,7 @@
 interface
 
   uses
-    Deltics.Pointers,
+    Deltics.Memory,
     Deltics.IO.Streams.Interfaces,
     Deltics.IO.Streams.MemoryStream;
 
@@ -132,7 +132,7 @@ implementation
     if result <= 0 then
       EXIT;
 
-    CopyMemory(Memory.ByteOffset(BaseAddress, Position), @aBuffer, result);
+    Memory.Copy(@aBuffer, result, Memory.Offset(BaseAddress, Position));
     Seek(result, soCurrent);
   end;
 

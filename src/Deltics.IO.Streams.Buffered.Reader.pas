@@ -38,8 +38,10 @@ implementation
 
   uses
     Deltics.Exceptions,
-    Deltics.Pointers,
-    Deltics.Pointers.Memory,
+    Deltics.Memory,
+  {$ifdef InlineMethodsSupported}
+    Deltics.Memory.Class_,
+  {$endif}
     Deltics.IO.Streams.Decorator;
 
 
@@ -83,7 +85,7 @@ implementation
 
     result := Stream.Read(fBuffer^, fBufferSize);
 
-    fBufferEnd      := Memory.ByteOffset(fBuffer, result);
+    fBufferEnd      := Memory.Offset(fBuffer, result);
     fBufferPointer  := fBuffer;
   end;
 
@@ -124,7 +126,7 @@ implementation
 
     if (aCount >= bufferedBytes) then
     begin
-      Memory.Copy(fBufferPointer, @aBuffer, bufferedBytes);
+      Memory.Copy(fBufferPointer, bufferedBytes, @aBuffer);
       Dec(aCount, bufferedBytes);
 
       result := bufferedBytes;
@@ -136,7 +138,7 @@ implementation
     end
     else
     begin
-      Memory.Copy(fBufferPointer, @aBuffer, aCount);
+      Memory.Copy(fBufferPointer, aCount, @aBuffer);
 
       Inc(fBufferPointer, aCount);
       result := aCount;
@@ -170,7 +172,7 @@ implementation
       buffered := Int64(fBufferEnd) - Int64(fBufferPointer);
       if buffered > 0 then
       begin
-        Memory.Copy(fBufferPointer, Memory.ByteOffset(dest.Memory, dest.Position), buffered);
+        Memory.Copy(fBufferPointer, buffered, Memory.Offset(dest.Memory, dest.Position));
         ResetBuffer;
 
         Dec(aCount, buffered);
@@ -220,7 +222,7 @@ implementation
       Resetbuffer;
     end
     else
-      fBufferPointer := Memory.ByteOffset(fBuffer, (newPos - fBufferPosition));
+      fBufferPointer := Memory.Offset(fBuffer, (newPos - fBufferPosition));
   end;
 
 

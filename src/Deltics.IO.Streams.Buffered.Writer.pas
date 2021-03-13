@@ -36,7 +36,7 @@ implementation
 
   uses
     Deltics.Exceptions,
-    Deltics.Pointers,
+    Deltics.Memory,
     Deltics.IO.Streams.Decorator;
 
 
@@ -183,7 +183,7 @@ implementation
     if (aCount >= (fBufferSize - (Integer(fBufferPointer) - Integer(fBuffer)))) then
       Flush;
 
-    Memory.Copy(@aBuffer, fBufferPointer, aCount);
+    Memory.Copy(@aBuffer, aCount, fBufferPointer);
     Inc(fBufferPointer, aCount);
   end;
 

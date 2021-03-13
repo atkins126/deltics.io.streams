@@ -60,7 +60,7 @@ implementation
   uses
     Windows,
     Deltics.Exceptions,
-    Deltics.Pointers,
+    Deltics.Memory,
     Deltics.IO.Streams.Buffered.Reader,
     Deltics.IO.Streams.Buffered.Writer;
 
