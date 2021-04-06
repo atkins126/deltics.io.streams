@@ -7,7 +7,7 @@
 interface
 
   uses
-    Deltics.Pointers,
+    Deltics.Memory,
     Deltics.IO.Streams.Interfaces,
     Deltics.IO.Streams.MemoryStream;
 
@@ -133,8 +133,6 @@ implementation
 
   { - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - }
   function TDynamicMemoryStream.Write(const aBuffer; aCount: LongInt): LongInt;
-  type
-    bytes = Deltics.Pointers.Memory;
   var
     newSize: NativeUInt;
   begin
@@ -146,7 +144,7 @@ implementation
     if Position + NativeUInt(aCount) > newSize then
       newSize := Position + NativeUInt(aCount);
 
-    CopyMemory(bytes.ByteOffset(BaseAddress, Position), @aBuffer, result);
+    Memory.Copy(@aBuffer, result, Memory.Offset(BaseAddress, Position));
     SetSize(newSize);
 
     Seek(result, soCurrent);

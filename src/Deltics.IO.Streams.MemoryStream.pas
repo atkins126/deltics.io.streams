@@ -9,7 +9,7 @@ interface
   uses
     Classes,
     Deltics.Multicast,
-    Deltics.Pointers,
+    Deltics.Memory,
     Deltics.IO.Streams.Interfaces;
 
 
@@ -321,7 +321,7 @@ implementation
     if result <= 0 then
       EXIT;
 
-    CopyMemory(@aBuffer, Memory.ByteOffset(BaseAddress, Position), result);
+    Memory.Copy(Memory.Offset(BaseAddress, Position), result, @aBuffer);
     Seek(result, soCurrent);
   end;
 

@@ -9,8 +9,8 @@ interface
   uses
     Classes,
     Deltics.Multicast,
-    Deltics.Pointers,
-    Deltics.Strings;
+    Deltics.Memory,
+    Deltics.StringTypes;
 
 
   type
